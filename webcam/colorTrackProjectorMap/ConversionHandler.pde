@@ -18,8 +18,8 @@ class ConversionHandler{
      int x = int(map(cTrack.closestX, reg.pt1.x, reg.pt2.x, 0, toWidth));
      int y = int(map(cTrack.closestY, reg.pt1.y, reg.pt2.y, 0, toHeight));
      trackValConverted.set(x, y);
-     println("the trackpoint is INSIDE of the registration box");
+     //println("the trackpoint is INSIDE of the registration box");
    }
-   else println("the trackpoint is OUTSIDE of the registration box");
+   //else println("the trackpoint is OUTSIDE of the registration box");
  }
 }

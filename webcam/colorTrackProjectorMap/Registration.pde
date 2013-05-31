@@ -23,8 +23,7 @@ class Registration{
  void setRegPoint(int regPoint, int mx, int my){
    if(regPoint == 1) pt1.set(mx, my);
    else{
-     pt2.set(mx, my); 
-     println("the second point was set to "+mx+", "+my);
+     pt2.set(mx, my);
    }
  }
  

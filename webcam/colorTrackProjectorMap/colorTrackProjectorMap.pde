@@ -10,20 +10,22 @@ void setup(){
   cTrack = new ColorTracking(video);
   reg = new Registration();
   conHand = new ConversionHandler();
-  size(640, 480);
+  size(displayWidth, displayHeight);
   smooth();
   reg.boxFlash(true);
 }
 
 void draw(){
+  background(255);
   cTrack.track();
-  if(cTrack.foundColor()) cTrack.displayPointer();
+  if(cTrack.foundColor() && cTrack.videoDisplaying) cTrack.displayPointer();
   if(reg.dragging) reg.calcBox(mouseX, mouseY);
-  reg.displayBox();
+  if(cTrack.videoDisplaying) reg.displayBox();
   conHand.calcTrackValues(width, height);
   if(conHand.isInsideRegBox(cTrack.closestX, cTrack.closestY)){
-    fill(255, 0, 0);
-    ellipse(conHand.trackValConverted.x, conHand.trackValConverted.y, 15, 15);
+    fill(170);
+    int s = 40;
+    ellipse(conHand.trackValConverted.x, conHand.trackValConverted.y, s, s);
   }
 }
 
@@ -32,7 +34,7 @@ void mousePressed() {
     // Save color where the mouse is clicked in trackColor variable
     cTrack.pickColor(mouseX, mouseY);
   }
-  else{
+  else if(cTrack.videoDisplaying){
     reg.clearPts();
     reg.setRegPoint(1, mouseX, mouseY);
     reg.dragging = true;
@@ -40,5 +42,14 @@ void mousePressed() {
 }
 
 void mouseReleased(){
-  reg.dragging = false;
+  if(cTrack.videoDisplaying){
+    reg.dragging = false;
+  }
+}
+
+void keyPressed(){
+  //if alt key
+  if(keyCode == 18){
+    cTrack.toggleVideoDisplay();
+  }
 }

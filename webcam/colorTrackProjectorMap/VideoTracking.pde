@@ -1,11 +1,12 @@
 class ColorTracking{
- 
+  
  Capture video;
  color trackColor;
  float worldRecord;
  int closestX, closestY;
- int threshold = 15;
+ int threshold = 20;
  PVector trackLoc;
+ boolean videoDisplaying = true; 
  
  ColorTracking(Capture _video){
   video = _video;
@@ -15,13 +16,17 @@ class ColorTracking{
   video.start();
  }
  
+ void toggleVideoDisplay(){
+   videoDisplaying = !videoDisplaying;
+ }
+ 
  void track(){
    // Capture and display the video
   if (video.available()) {
     video.read();
   }
   video.loadPixels();
-  image(video,0,0);
+  if(videoDisplaying) image(video,0,0);
 
   // Before we begin searching, the "world record" for closest color is set to a high number that is easy for the first pixel to beat.
   worldRecord = 500; 
