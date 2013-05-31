@@ -4,7 +4,7 @@ class ColorTracking{
  color trackColor;
  float worldRecord;
  int closestX, closestY;
- int threshold = 20;
+ int threshold = 23;
  PVector trackLoc;
  boolean videoDisplaying = true; 
  
